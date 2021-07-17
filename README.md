@@ -1,23 +1,40 @@
-# tf_blazeface_training
-You can train blazeface on single/multi GPU machines on unlimitted samples using data generator
+# BlazeFace
 
-Dependencies: <br>
-Method 1: pip install tensorflow==2.0
+This is **unofficial** tensorflow blazeface implementation from scratch.
+This repo includes the entire training pipeline of blazeface.
+However, since the dataset used in the training process is a modified version of some datasets, it is not shared at this stage.
+Anchor / prior box hyperparameters were taken from the [MediaPipe](https://github.com/google/mediapipe) implementation.
+Loss calculation and augmentation methods were implemented as in [SSD](https://github.com/FurkanOM/tf-ssd).
 
-Method 2: 
-- download this [file](https://www.dropbox.com/s/s7tyx1t4xuh8p7k/packages.zip?dl=0)
-- unzip it at desired path
-- change directory to the desired path
-- run this command in cmd: <br>
-for %x in (dir \*.*) do python -m pip install %x
+It's implemented and tested with **tensorflow 2.0, 2.1, and 2.2**
 
-<br>
+## Usage
 
+Project models created in virtual environment using [miniconda](https://docs.conda.io/en/latest/miniconda.html).
+You can also create required virtual environment with [conda](https://docs.conda.io/projects/conda/en/latest/user-guide/tasks/manage-environments.html#creating-an-environment-from-an-environment-yml-file).
 
-**Installtion:** <br>
-download [this zip file](https://www.dropbox.com/s/7wtd59jly9been0/tf-blazeface.zip?dl=0), unzip it and copy the two files from this repo to work with main utilities of blazeface.<br>
+To create virtual environment (tensorflow-2 gpu environment):
 
-Install Anaconda or python from the following [link](https://www.dropbox.com/s/yurh9gu4xz3lb0x/Anaconda3-2020.02-Windows-x86_64.exe?dl=0) respectively,<br>
+```sh
+conda env create -f environment.yml
+```
 
-Training:<br>
-Use single or multi cpu training file to train the Blazeface based on the generators for any dataset
+To train and test BlazeFace model:
+
+```sh
+python trainer.py
+python predictor.py
+```
+
+If you have GPU issues you can use **-handle-gpu** flag with these commands:
+
+```sh
+python trainer.py -handle-gpu
+```
+
+### References
+
+* BlazeFace: Sub-millisecond Neural Face Detection on Mobile GPUs [[paper]](https://arxiv.org/abs/1907.05047)
+* SSD: Single Shot MultiBox Detector [[paper]](https://arxiv.org/abs/1512.02325)
+* MediaPipe [[code]](https://github.com/google/mediapipe)
+* BlazeFace-PyTorch [[code]](https://github.com/hollance/BlazeFace-PyTorch)
